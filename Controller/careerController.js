@@ -1,7 +1,7 @@
-import Message from "../Modal/Message.js";
+import Career from "../Modal/Career.js";
 
-// Create new message
-export const createMessage = async (req, res) => {
+// Create new career entry
+export const createCareer = async (req, res) => {
   try {
     const { firstName, lastName, email, mobileNumber, message } = req.body;
 
@@ -9,7 +9,7 @@ export const createMessage = async (req, res) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    const newMessage = new Message({
+    const newCareer = new Career({
       firstName,
       lastName,
       email,
@@ -17,18 +17,18 @@ export const createMessage = async (req, res) => {
       message,
     });
 
-    await newMessage.save();
-    res.status(201).json({ success: true, data: newMessage });
+    await newCareer.save();
+    res.status(201).json({ success: true, data: newCareer });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
 };
 
-// Get all messages
-export const getMessages = async (req, res) => {
+// Get all career entries
+export const getCareers = async (req, res) => {
   try {
-    const messages = await Message.find().sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: messages });
+    const careers = await Career.find().sort({ createdAt: -1 });
+    res.status(200).json({ success: true, data: careers });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
